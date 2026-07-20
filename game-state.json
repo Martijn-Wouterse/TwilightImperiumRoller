@@ -1,0 +1,481 @@
+{
+  "$id": "1",
+  "Players": {
+    "$id": "2",
+    "$values": [
+      {
+        "$id": "3",
+        "Name": "Martijn",
+        "Objectives": {
+          "$id": "4",
+          "$values": [
+            {
+              "$id": "5",
+              "Name": "kill joey",
+              "Description": "kill joey",
+              "ScoredPlayers": {
+                "$id": "6",
+                "$values": [
+                  {
+                    "$ref": "3"
+                  },
+                  {
+                    "$id": "7",
+                    "Name": "Tim",
+                    "Objectives": {
+                      "$id": "8",
+                      "$values": [
+                        {
+                          "$ref": "5"
+                        },
+                        {
+                          "$id": "9",
+                          "Name": "test?",
+                          "Description": "test",
+                          "ScoredPlayers": {
+                            "$id": "10",
+                            "$values": [
+                              {
+                                "$id": "11",
+                                "Name": "Rixt",
+                                "Objectives": {
+                                  "$id": "12",
+                                  "$values": [
+                                    {
+                                      "$id": "13",
+                                      "Name": "test",
+                                      "Description": "test",
+                                      "ScoredPlayers": {
+                                        "$id": "14",
+                                        "$values": []
+                                      },
+                                      "Points": 1,
+                                      "IsSecret": true
+                                    },
+                                    {
+                                      "$id": "15",
+                                      "Name": "humiliate joey",
+                                      "Description": "humiliate joey",
+                                      "ScoredPlayers": {
+                                        "$id": "16",
+                                        "$values": [
+                                          {
+                                            "$ref": "3"
+                                          },
+                                          {
+                                            "$id": "17",
+                                            "Name": "Robert",
+                                            "Objectives": {
+                                              "$id": "18",
+                                              "$values": [
+                                                {
+                                                  "$ref": "15"
+                                                },
+                                                {
+                                                  "$ref": "9"
+                                                },
+                                                {
+                                                  "$id": "19",
+                                                  "Name": "aergaet",
+                                                  "Description": "wargawrgrg",
+                                                  "ScoredPlayers": {
+                                                    "$id": "20",
+                                                    "$values": [
+                                                      {
+                                                        "$ref": "3"
+                                                      },
+                                                      {
+                                                        "$id": "21",
+                                                        "Name": "Tjalling",
+                                                        "Objectives": {
+                                                          "$id": "22",
+                                                          "$values": [
+                                                            {
+                                                              "$ref": "19"
+                                                            },
+                                                            {
+                                                              "$id": "23",
+                                                              "Name": "AWRGAERG",
+                                                              "Description": "WAFAWF",
+                                                              "ScoredPlayers": {
+                                                                "$id": "24",
+                                                                "$values": [
+                                                                  {
+                                                                    "$ref": "11"
+                                                                  },
+                                                                  {
+                                                                    "$ref": "21"
+                                                                  },
+                                                                  {
+                                                                    "$ref": "3"
+                                                                  },
+                                                                  {
+                                                                    "$ref": "7"
+                                                                  }
+                                                                ]
+                                                              },
+                                                              "Points": 1,
+                                                              "IsSecret": false
+                                                            }
+                                                          ]
+                                                        },
+                                                        "Points": 2,
+                                                        "Faction": 18,
+                                                        "Color": "purple"
+                                                      },
+                                                      {
+                                                        "$ref": "17"
+                                                      }
+                                                    ]
+                                                  },
+                                                  "Points": 1,
+                                                  "IsSecret": false
+                                                },
+                                                {
+                                                  "$id": "25",
+                                                  "Name": "gr4w2",
+                                                  "Description": "AWRGEAWRG",
+                                                  "ScoredPlayers": {
+                                                    "$id": "26",
+                                                    "$values": [
+                                                      {
+                                                        "$id": "27",
+                                                        "Name": "Daan",
+                                                        "Objectives": {
+                                                          "$id": "28",
+                                                          "$values": [
+                                                            {
+                                                              "$ref": "25"
+                                                            }
+                                                          ]
+                                                        },
+                                                        "Points": 1,
+                                                        "Faction": 5,
+                                                        "Color": "blue"
+                                                      },
+                                                      {
+                                                        "$ref": "7"
+                                                      },
+                                                      {
+                                                        "$ref": "17"
+                                                      }
+                                                    ]
+                                                  },
+                                                  "Points": 1,
+                                                  "IsSecret": false
+                                                },
+                                                {
+                                                  "$id": "29",
+                                                  "Name": "AWRGARG",
+                                                  "Description": "ARGAERG",
+                                                  "ScoredPlayers": {
+                                                    "$id": "30",
+                                                    "$values": [
+                                                      {
+                                                        "$ref": "7"
+                                                      },
+                                                      {
+                                                        "$ref": "17"
+                                                      }
+                                                    ]
+                                                  },
+                                                  "Points": 1,
+                                                  "IsSecret": false
+                                                }
+                                              ]
+                                            },
+                                            "Points": 4,
+                                            "Faction": 13,
+                                            "Color": "black"
+                                          },
+                                          {
+                                            "$ref": "11"
+                                          }
+                                        ]
+                                      },
+                                      "Points": 0,
+                                      "IsSecret": false
+                                    },
+                                    {
+                                      "$ref": "9"
+                                    },
+                                    {
+                                      "$ref": "23"
+                                    }
+                                  ]
+                                },
+                                "Points": 3,
+                                "Faction": 4,
+                                "Color": "yellow"
+                              },
+                              {
+                                "$ref": "3"
+                              },
+                              {
+                                "$ref": "7"
+                              },
+                              {
+                                "$ref": "17"
+                              }
+                            ]
+                          },
+                          "Points": 1,
+                          "IsSecret": false
+                        },
+                        {
+                          "$ref": "25"
+                        },
+                        {
+                          "$ref": "23"
+                        },
+                        {
+                          "$ref": "29"
+                        },
+                        {
+                          "$id": "31",
+                          "Name": "secret tunnel",
+                          "Description": "aawrfaerg",
+                          "ScoredPlayers": {
+                            "$id": "32",
+                            "$values": []
+                          },
+                          "Points": 1,
+                          "IsSecret": true
+                        }
+                      ]
+                    },
+                    "Points": 6,
+                    "Faction": 0,
+                    "Color": "green"
+                  }
+                ]
+              },
+              "Points": 1,
+              "IsSecret": false
+            },
+            {
+              "$ref": "15"
+            },
+            {
+              "$ref": "9"
+            },
+            {
+              "$ref": "19"
+            },
+            {
+              "$ref": "23"
+            },
+            {
+              "$id": "33",
+              "Name": "secret objective",
+              "Description": "rtshwrsyhry",
+              "ScoredPlayers": {
+                "$id": "34",
+                "$values": []
+              },
+              "Points": 1,
+              "IsSecret": true
+            },
+            {
+              "$id": "35",
+              "Name": "afarfq3rg",
+              "Description": "qrfqrgqg",
+              "ScoredPlayers": {
+                "$id": "36",
+                "$values": []
+              },
+              "Points": 1,
+              "IsSecret": true
+            }
+          ]
+        },
+        "Points": 6,
+        "Faction": 18,
+        "Color": "pink"
+      },
+      {
+        "$ref": "27"
+      },
+      {
+        "$ref": "7"
+      },
+      {
+        "$ref": "21"
+      },
+      {
+        "$ref": "11"
+      },
+      {
+        "$ref": "17"
+      }
+    ]
+  },
+  "Rounds": {
+    "$id": "37",
+    "$values": [
+      {
+        "$id": "38",
+        "RoundNumber": 1,
+        "Objectives": {
+          "$id": "39",
+          "$values": [
+            {
+              "$ref": "5"
+            },
+            {
+              "$ref": "15"
+            }
+          ]
+        }
+      },
+      {
+        "$id": "40",
+        "RoundNumber": 2,
+        "Objectives": {
+          "$id": "41",
+          "$values": [
+            {
+              "$ref": "9"
+            }
+          ]
+        }
+      },
+      {
+        "$id": "42",
+        "RoundNumber": 3,
+        "Objectives": {
+          "$id": "43",
+          "$values": [
+            {
+              "$ref": "19"
+            }
+          ]
+        }
+      },
+      {
+        "$id": "44",
+        "RoundNumber": 4,
+        "Objectives": {
+          "$id": "45",
+          "$values": [
+            {
+              "$ref": "25"
+            }
+          ]
+        }
+      },
+      {
+        "$id": "46",
+        "RoundNumber": 5,
+        "Objectives": {
+          "$id": "47",
+          "$values": [
+            {
+              "$ref": "23"
+            }
+          ]
+        }
+      },
+      {
+        "$id": "48",
+        "RoundNumber": 6,
+        "Objectives": {
+          "$id": "49",
+          "$values": [
+            {
+              "$ref": "29"
+            }
+          ]
+        }
+      },
+      {
+        "$id": "50",
+        "RoundNumber": 7,
+        "Objectives": {
+          "$id": "51",
+          "$values": [
+            {
+              "$id": "52",
+              "Name": "WRFRQG",
+              "Description": "GAGAERG",
+              "ScoredPlayers": {
+                "$id": "53",
+                "$values": []
+              },
+              "Points": 2,
+              "IsSecret": false
+            }
+          ]
+        }
+      },
+      {
+        "$id": "54",
+        "RoundNumber": 8,
+        "Objectives": {
+          "$id": "55",
+          "$values": [
+            {
+              "$id": "56",
+              "Name": "AERGAERG",
+              "Description": "AEAEG",
+              "ScoredPlayers": {
+                "$id": "57",
+                "$values": []
+              },
+              "Points": 2,
+              "IsSecret": false
+            }
+          ]
+        }
+      },
+      {
+        "$id": "58",
+        "RoundNumber": 9,
+        "Objectives": {
+          "$id": "59",
+          "$values": [
+            {
+              "$id": "60",
+              "Name": "AWERGAEG",
+              "Description": "AREGSRYUJU",
+              "ScoredPlayers": {
+                "$id": "61",
+                "$values": []
+              },
+              "Points": 2,
+              "IsSecret": false
+            }
+          ]
+        }
+      },
+      {
+        "$id": "62",
+        "RoundNumber": 10,
+        "Objectives": {
+          "$id": "63",
+          "$values": []
+        }
+      }
+    ]
+  },
+  "Agenda": {
+    "$id": "64",
+    "$values": [
+      {
+        "$id": "65",
+        "Name": "No more space travel",
+        "Description": "All hyperlanes closed"
+      },
+      {
+        "$id": "66",
+        "Name": "All hyperlanes are open",
+        "Description": "Yes it;s confusing"
+      },
+      {
+        "$id": "67",
+        "Name": "No more warsuns",
+        "Description": "All warsuns are now forbidden."
+      }
+    ]
+  }
+}

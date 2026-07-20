@@ -1,0 +1,213 @@
+﻿@using System.Drawing
+@using TwilightImperiumRoller.Models
+<div class="w-100">
+
+  <div class="popout @overlayVisible glow" style="width: fit-content;">
+    <div class="d-flex flex-column justify-content-evenly m-2 p-2">
+      <h2>Adding objective for: @(editingPlayer == null ? "Everyone" : editingPlayer.Name)</h2>
+      Objective Name:
+      <RadzenTextBox @bind-Value="newObjective.Name"></RadzenTextBox>
+      Objective text:
+      <RadzenTextBox @bind-Value="newObjective.Description"></RadzenTextBox>
+      Points:
+      <RadzenNumeric @bind-Value="newObjective.Points">points:</RadzenNumeric>
+      Is secret:
+      <RadzenCheckBox @bind-value="newObjective.IsSecret"></RadzenCheckBox>
+      <RadzenButton Click="OnConfirmObjective">Confirm</RadzenButton>
+    </div>
+  </div>
+
+  <div class="overlay @overlayVisible" @onclick="@HideOverlay" />
+
+  <div class="d-flex flex-column gap-2">
+    <div class="d-flex flex-row justify-content-evenly gap-2 flex-wrap">
+      @foreach (Player player in GameStateModel.Players.OrderByDescending(p => p.Points))
+      {
+        <div class="d-flex flex-column h-100 align-items-center gap-1 glow"
+             style="outline: 2px solid transparent;
+/*                   border-color: @player.Color;;
+                  box-shadow: 0 0 10px @player.Color; */
+                  background:#00004480 ;
+                  min-width: fit-content;">
+          <div class="w-100 h-100 p-3" style="background: @Color.FromArgb((int)(0.6 * 255), Color.FromName(player.Color)).ToHexaString(); width: @(Math.Round( (decimal) (90 /GameStateModel.Players.Count)) )vw !important; min-width: 300px;">
+            <div style="opacity: 1;">
+              <div class="d-flex flex-row>">
+                <div class="d-flex flex-column justify-content-around">
+                  @if (IsAdmin)
+                  {
+                    <h2>@player.Name</h2>
+                    <RadzenTextBox @bind-Value="@player.Color" Change="@(args => { player.Color = args; StateHasChanged(); StoreGameState();})" Immediate="false"></RadzenTextBox>
+                  }
+                  else
+                  {
+                    <h2>@player.Name</h2>
+                  }
+
+                  @if (IsAdmin)
+                  {
+                    <RadzenDropDown Data="@Factions" @bind-Value="@player.Faction" Name="Factions" Change="@(args => { player.Faction = (EFactions)args; StateHasChanged(); StoreGameState();})">
+                      <Template>
+                        @Enum.GetName(typeof(EFactions), context)
+                      </Template>
+                    </RadzenDropDown>
+                  }
+                  else
+                  {
+                    <h4>@player.Faction.GetFactionName()</h4>
+                  }
+
+                </div>
+
+                <RadzenImage Style="width:50px; height: 50px;" Path="@player.Faction.GetFactionLink()" />
+
+
+              </div>
+              <h2>@player.Points</h2>
+              <span>Scored objectives:</span>
+              <div class="d-flex flex-row flex-wrap w-100 gap-2">
+                @foreach (var objective in player.Objectives)
+                {
+                  <div class="d-flex flex-row justify-content-between">
+                    <div class="@(objective.IsSecret ? "secret-objective" : "objective")">@objective.Name - @objective.Points </div>
+                    @if (IsAdmin)
+                    {
+                      <RadzenIcon Icon="Close" IconColor="@Colors.Warning" onclick="@(() => RemoveObjective(objective, player))"></RadzenIcon>
+                    }
+
+                  </div>
+                }
+              </div>
+              @if (IsAdmin)
+              {
+                <RadzenButton Click="@(() => OnAddObjective(player))">Add objective</RadzenButton>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+    <div class="d-flex flex-column w-100 justify-content-center">
+      @if (IsAdmin)
+      {
+        <RadzenButton Click="@(() => AddRound())">Add Round</RadzenButton>
+      }
+      <div class="d-flex flex-row gap-2 flex-wrap w-100 justify-content-center">
+        @foreach (var round in GameStateModel.Rounds)
+        {
+          <div class="d-flex flex-column align-items-center" style="min-width: 300px;">
+            <div class="d-flex flex-row justify-content-center w-100 m-2" style="border-bottom: white 2px solid">
+            <h2>Round @round.RoundNumber</h2>
+            </div>
+            <div class="d-flex flex-row gap-2 flex-wrap">
+              @foreach (var objective in round.Objectives)
+              {
+                <div class="d-flex flex-column gap-1 glow justify-content-center  p-2" style="background:#00004480 ; max-width: 20vw; min-width:300px;">
+                  <div class="d-flex flex-row justify-content-center">
+
+                    <h3>@objective.Name</h3>
+
+                    @if (IsAdmin)
+                    {
+                      <RadzenIcon Icon="Close" IconColor="@Colors.Warning" onclick="@(() => RemoveObjective(objective))"></RadzenIcon>
+                    }
+                  </div>
+                  <div class="d-flex flex-row justify-content-center">@objective.Description</div>
+                  <div class="d-flex justify-content-center">Scored by:</div>
+                  <div class="d-grid gap-2" style="grid-template-columns: 1fr 1fr;">
+                    @foreach (Player player in GameStateModel.Players)
+                    {
+                      <div class="d-flex flex-row justify-content-around">
+                        <div class="d-flex flex-row justify-content-start w-100 align-items-baseline">
+                          <RadzenCheckBox Style="margin: 5px;" Disabled="@(IsAdmin == false)" Change="@( (bool isChecked) => OnGetObjective(objective, player) )" Value="@objective.ScoredPlayers.Contains(player)" />
+                          <span> @player.Name</span>
+                        </div>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+              @if (IsAdmin)
+              {
+                <RadzenButton Click="@(() => OnAddObjective(round))">Add objective</RadzenButton>
+              }
+
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .secret-objective {
+    background-color: rgba(139, 0, 0, 0.5);
+    padding: 2px;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .objective {
+    background-color: rgba(0, 133, 255, 0.5);
+    padding: 2px;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .invisible {
+    display: none;
+  }
+
+  .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    background-color: black;
+    opacity: 25%;
+    z-index: 999998;
+  }
+
+  .popout {
+    color: black !important;
+    position: fixed;
+    left: 10vw;
+    top: 10vw;
+    width: 80vw !important;
+    background: white;
+    opacity: 100%;
+    z-index: 999999;
+    max-height: 90vh;
+    overflow: auto;
+  }
+
+  .result {
+    display: flex;
+    padding: 2px;
+    margin: 2px;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+    height: 2em;
+    width: 2em;
+    align-content: center;
+    justify-content: center;
+  }
+
+  .glow {
+    outline: 2px solid transparent;
+    border-color: #9ecaed;
+    box-shadow: 0 0 10px #9ecaed;
+  }
+
+  .body {
+    background-color: black;
+  }
+
+  li.rz-dropdown-item {
+    color: black;
+  }
+
+</style>
+
+

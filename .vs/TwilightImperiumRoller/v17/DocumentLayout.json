@@ -1,0 +1,155 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|c:\\users\\martijn.wouterse\\source\\repos\\twilightimperiumroller\\components\\agendas.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|solutionrelative:components\\agendas.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|c:\\users\\martijn.wouterse\\source\\repos\\twilightimperiumroller\\components\\agendas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|solutionrelative:components\\agendas.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|c:\\users\\martijn.wouterse\\source\\repos\\twilightimperiumroller\\components\\gamestate.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|solutionrelative:components\\gamestate.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|c:\\users\\martijn.wouterse\\source\\repos\\twilightimperiumroller\\components\\pages\\home.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|solutionrelative:components\\pages\\home.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|c:\\users\\martijn.wouterse\\source\\repos\\twilightimperiumroller\\components\\gamestate.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|solutionrelative:components\\gamestate.razor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|c:\\users\\martijn.wouterse\\source\\repos\\twilightimperiumroller\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|solutionrelative:components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|c:\\users\\martijn.wouterse\\source\\repos\\twilightimperiumroller\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|solutionrelative:components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|c:\\users\\martijn.wouterse\\source\\repos\\twilightimperiumroller\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{8C7BB9B5-B8DD-4765-BBD3-74DA56182F95}|TwilightImperiumRoller.csproj|solutionrelative:components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Agendas.razor.cs",
+              "DocumentMoniker": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Agendas.razor.cs",
+              "RelativeDocumentMoniker": "Components\\Agendas.razor.cs",
+              "ToolTip": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Agendas.razor.cs",
+              "RelativeToolTip": "Components\\Agendas.razor.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T08:02:59.282Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "GameState.razor.cs",
+              "DocumentMoniker": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\GameState.razor.cs",
+              "RelativeDocumentMoniker": "Components\\GameState.razor.cs",
+              "ToolTip": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\GameState.razor.cs",
+              "RelativeToolTip": "Components\\GameState.razor.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAswEgAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T08:07:44.185Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Home.razor.cs",
+              "DocumentMoniker": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Pages\\Home.razor.cs",
+              "RelativeDocumentMoniker": "Components\\Pages\\Home.razor.cs",
+              "ToolTip": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Pages\\Home.razor.cs",
+              "RelativeToolTip": "Components\\Pages\\Home.razor.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAowB0AAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T08:00:58.972Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Agendas.razor",
+              "DocumentMoniker": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Agendas.razor",
+              "RelativeDocumentMoniker": "Components\\Agendas.razor",
+              "ToolTip": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Agendas.razor",
+              "RelativeToolTip": "Components\\Agendas.razor",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAiwBMAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-07T07:59:39.171Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GameState.razor",
+              "DocumentMoniker": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\GameState.razor",
+              "RelativeDocumentMoniker": "Components\\GameState.razor",
+              "ToolTip": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\GameState.razor",
+              "RelativeToolTip": "Components\\GameState.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-03T08:03:23.278Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.razor",
+              "DocumentMoniker": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\App.razor",
+              "RelativeDocumentMoniker": "Components\\App.razor",
+              "ToolTip": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\App.razor",
+              "RelativeToolTip": "Components\\App.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-03T07:55:41.069Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "Components\\Layout\\MainLayout.razor",
+              "ToolTip": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "Components\\Layout\\MainLayout.razor",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-03T07:55:46.882Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Home.razor",
+              "DocumentMoniker": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "Components\\Pages\\Home.razor",
+              "ToolTip": "C:\\Users\\martijn.wouterse\\source\\repos\\TwilightImperiumRoller\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "Components\\Pages\\Home.razor",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAwBoAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-02-02T14:37:29.831Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

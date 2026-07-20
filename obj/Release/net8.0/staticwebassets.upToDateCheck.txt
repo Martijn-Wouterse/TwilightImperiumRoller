@@ -1,0 +1,13 @@
+wwwroot\app.css
+wwwroot\bootstrap\bootstrap.min.css
+wwwroot\bootstrap\bootstrap.min.css.map
+wwwroot\images\Carrier_Plastic.webp
+wwwroot\images\Cruiser_Plastic.webp
+wwwroot\images\Destroyer_Plastic.webp
+wwwroot\images\Dreadnought_Plastic.webp
+wwwroot\images\Fighter_Plastic.webp
+wwwroot\images\Flagship_Plastic.webp
+wwwroot\images\Infantry_Plastic.webp
+wwwroot\images\Mech_Plastic.webp
+wwwroot\images\PDS_Plastic.webp
+wwwroot\images\War_Sun_Plastic.webp

@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121.
+-->
+<Project>
+  <PropertyGroup>
+    <_PublishTargetUrl>C:\Users\martijn.wouterse\source\repos\TwilightImperiumRoller\bin\Release\net8.0\publish\</_PublishTargetUrl>
+    <History>True|2026-04-23T08:26:09.8081880Z||;True|2026-04-20T14:54:28.1542815+02:00||;True|2026-02-04T11:00:55.7013648+01:00||;True|2026-02-04T11:00:14.2941179+01:00||;True|2025-11-06T14:01:21.9565186+01:00||;</History>
+    <LastFailureDetails />
+  </PropertyGroup>
+</Project>
