@@ -13,7 +13,7 @@ public class ObjectiveCatalogService : IObjectiveCatalogService
 
   public ObjectiveCatalogService(IWebHostEnvironment environment, ILogger<ObjectiveCatalogService> logger)
   {
-    _filePath = Path.Combine(environment.ContentRootPath, "objectives.json");
+    _filePath = Path.Combine(environment.ContentRootPath, "Data", "objectives.json");
     _logger = logger;
   }
 

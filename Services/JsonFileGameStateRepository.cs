@@ -11,7 +11,7 @@ public class JsonFileGameStateRepository : IGameStateRepository
 
   public JsonFileGameStateRepository(IWebHostEnvironment environment, ILogger<JsonFileGameStateRepository> logger)
   {
-    _filePath = Path.Combine(environment.ContentRootPath, "game-state.json");
+    _filePath = Path.Combine(environment.ContentRootPath, "Data", "game-state.json");
     _logger = logger;
   }
 

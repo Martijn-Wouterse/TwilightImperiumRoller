@@ -13,7 +13,7 @@ public class AgendaCatalogService : IAgendaCatalogService
 
   public AgendaCatalogService(IWebHostEnvironment environment, ILogger<AgendaCatalogService> logger)
   {
-    _filePath = Path.Combine(environment.ContentRootPath, "agendas.json");
+    _filePath = Path.Combine(environment.ContentRootPath, "Data", "agendas.json");
     _logger = logger;
   }
 

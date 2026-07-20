@@ -4,11 +4,21 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Blazor.Bootstrap" Version="3.4.0" />
     <PackageReference Include="Radzen.Blazor" Version="8.1.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Data\agendas.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Data\objectives.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

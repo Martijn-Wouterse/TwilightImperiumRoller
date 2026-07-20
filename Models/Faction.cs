@@ -1,9 +1,8 @@
 using System.ComponentModel;
-using System.Reflection;
 
 namespace TwilightImperiumRoller.Models;
 
-public enum EFactions
+public enum Faction
 {
   [Description("Arborec")]
   [FactionLink("https://static.wikia.nocookie.net/twilight-imperium-4/images/8/8f/ArborecSymbolSquare.png/revision/latest/scale-to-width-down/55?cb=20250928223912")]
@@ -77,37 +76,4 @@ public enum EFactions
   [Description("The Vuil'Raith Cabal")]
   [FactionLink("https://static.wikia.nocookie.net/twilight-imperium-4/images/0/04/CabalFactionSymbol.png/revision/latest/scale-to-width-down/55?cb=20201103113606")]
   VuilRaith
-}
-
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field)]
-public sealed class FactionLinkAttribute(string text) : Attribute
-{
-  public string Link { get; } = text;
-}
-
-public static class Extensions
-{
-  public static string GetFactionLink(this Enum enumValue, Func<string, string>? translationFunction = null)
-  {
-    var enumValueAsString = enumValue.ToString();
-    var val = enumValue.GetType().GetMember(enumValueAsString).FirstOrDefault();
-    var enumVal = val?.GetCustomAttribute<FactionLinkAttribute>()?.Link ?? enumValueAsString;
-
-    if (translationFunction != null)
-      return translationFunction(enumVal);
-
-    return enumVal;
-  }
-
-  public static string GetFactionName(this Enum enumValue, Func<string, string>? translationFunction = null)
-  {
-    var enumValueAsString = enumValue.ToString();
-    var val = enumValue.GetType().GetMember(enumValueAsString).FirstOrDefault();
-    var enumVal = val?.GetCustomAttribute<DescriptionAttribute>()?.Description ?? enumValueAsString;
-
-    if (translationFunction != null)
-      return translationFunction(enumVal);
-
-    return enumVal;
-  }
 }

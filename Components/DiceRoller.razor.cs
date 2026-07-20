@@ -58,7 +58,7 @@ public partial class DiceRoller
     {
       for (int i = 0; i < ship.Dice; i++)
       {
-        Result newRoll = new();
+        DieRoll newRoll = new();
 
         ship.Results.Add(newRoll);
         tasks.Add(DiceRoll(newRoll));
@@ -98,7 +98,7 @@ public partial class DiceRoller
     }
   }
 
-  private async Task DiceRoll(Result result)
+  private async Task DiceRoll(DieRoll result)
   {
     TimeSpan rollDuration = DiceRollingService.GetRollDuration(totalDiceInPool);
     DateTime start = DateTime.UtcNow;

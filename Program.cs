@@ -8,8 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddBlazorBootstrap();
 builder.Services.AddRadzenComponents();
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+  .AddInteractiveServerComponents();
 builder.Services.AddSingleton<IGameStateRepository, JsonFileGameStateRepository>();
+builder.Services.AddSingleton<IGameLogService, GameLogService>();
 builder.Services.AddSingleton<IGameStateService, GameStateService>();
 builder.Services.AddSingleton<IDiceRollingService, DiceRollingService>();
 builder.Services.AddSingleton<IAgendaCatalogService, AgendaCatalogService>();
@@ -24,9 +25,9 @@ await app.Services.GetRequiredService<IObjectiveCatalogService>().InitializeAsyn
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+  app.UseExceptionHandler("/Error", createScopeForErrors: true);
+  // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+  app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -35,6 +36,6 @@ app.UseStaticFiles();
 app.UseAntiforgery();
 
 app.MapRazorComponents<App>()
-    .AddInteractiveServerRenderMode();
+  .AddInteractiveServerRenderMode();
 
 app.Run();

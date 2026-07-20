@@ -429,6 +429,9 @@ FodyWeavers.xsd
 *.msp
 
 ## Project-specific
-# Runtime game state persisted by JsonFileGameStateRepository to the content root
-game-state.json
-game-state.json.bak
+# Runtime game state persisted by JsonFileGameStateRepository to Data/
+Data/game-state.json
+Data/game-state.json.bak
+
+# Human-readable mutation log written by GameLogService to Data/
+Data/game-log.txt

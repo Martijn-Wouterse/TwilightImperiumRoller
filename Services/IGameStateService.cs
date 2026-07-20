@@ -11,8 +11,8 @@ public interface IGameStateService
 
   Task InitializeAsync();
 
-  /// <summary>Persists <see cref="Current"/> as-is and raises <see cref="Changed"/>. Use after in-place edits (e.g. player color/faction).</summary>
-  Task SaveAsync();
+  Task UpdatePlayerColorAsync(Guid playerId, string color);
+  Task UpdatePlayerFactionAsync(Guid playerId, Faction faction);
 
   IEnumerable<Objective> GetObjectivesForPlayer(Guid playerId);
   IEnumerable<Objective> GetObjectivesForRound(GameRound round);
