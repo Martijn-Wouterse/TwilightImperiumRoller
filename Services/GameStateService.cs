@@ -73,14 +73,15 @@ public class GameStateService : IGameStateService
     return round;
   }
 
-  public async Task<Objective> AddSecretObjectiveAsync(Guid playerId, string name, string description, int points)
+  public async Task<Objective> AddSecretObjectiveAsync(Guid playerId, string name, string condition, int points, string source = "")
   {
     var objective = new Objective
     {
       Name = name,
-      Description = description,
+      Condition = condition,
       Points = points,
       IsSecret = true,
+      Source = source,
       OwnerPlayerId = playerId,
     };
     objective.ScoredPlayerIds.Add(playerId);
@@ -90,15 +91,16 @@ public class GameStateService : IGameStateService
     return objective;
   }
 
-  public async Task<Objective> AddRoundObjectiveAsync(Guid roundId, string name, string description, int points, bool isSecret)
+  public async Task<Objective> AddRoundObjectiveAsync(Guid roundId, string name, string condition, int points, bool isSecret, string source = "")
   {
     var round = Current.Rounds.First(r => r.Id == roundId);
     var objective = new Objective
     {
       Name = name,
-      Description = description,
+      Condition = condition,
       Points = points,
       IsSecret = isSecret,
+      Source = source,
     };
 
     Current.Objectives.Add(objective);

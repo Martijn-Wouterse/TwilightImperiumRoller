@@ -13,11 +13,13 @@ builder.Services.AddSingleton<IGameStateRepository, JsonFileGameStateRepository>
 builder.Services.AddSingleton<IGameStateService, GameStateService>();
 builder.Services.AddSingleton<IDiceRollingService, DiceRollingService>();
 builder.Services.AddSingleton<IAgendaCatalogService, AgendaCatalogService>();
+builder.Services.AddSingleton<IObjectiveCatalogService, ObjectiveCatalogService>();
 
 var app = builder.Build();
 
 await app.Services.GetRequiredService<IGameStateService>().InitializeAsync();
 await app.Services.GetRequiredService<IAgendaCatalogService>().InitializeAsync();
+await app.Services.GetRequiredService<IObjectiveCatalogService>().InitializeAsync();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -9,6 +9,9 @@ public partial class GameState : ComponentBase, IDisposable
   [Inject]
   private IGameStateService GameStateService { get; set; } = null!;
 
+  [Inject]
+  private IObjectiveCatalogService ObjectiveCatalog { get; set; } = null!;
+
   [Parameter]
   public bool IsAdmin { get; set; }
 
@@ -18,6 +21,10 @@ public partial class GameState : ComponentBase, IDisposable
   private GameRound? editingRound;
   private Objective newObjective = new();
   private IEnumerable<EFactions> Factions { get; } = Enum.GetValues<EFactions>();
+
+  // Secret objectives are added per-player; round objectives are always public, so suggestions are scoped accordingly.
+  private IEnumerable<string> ObjectiveNameSuggestions =>
+    ObjectiveCatalog.All.Where(o => o.IsSecret == (editingPlayer != null)).Select(o => o.Name);
 
   protected override void OnInitialized()
   {
@@ -46,14 +53,23 @@ public partial class GameState : ComponentBase, IDisposable
   {
     if (editingPlayer != null)
     {
-      await GameStateService.AddSecretObjectiveAsync(editingPlayer.Id, newObjective.Name, newObjective.Description, newObjective.Points);
+      await GameStateService.AddSecretObjectiveAsync(editingPlayer.Id, newObjective.Name, newObjective.Condition, newObjective.Points, newObjective.Source);
     }
     else if (editingRound != null)
     {
-      await GameStateService.AddRoundObjectiveAsync(editingRound.Id, newObjective.Name, newObjective.Description, newObjective.Points, newObjective.IsSecret);
+      await GameStateService.AddRoundObjectiveAsync(editingRound.Id, newObjective.Name, newObjective.Condition, newObjective.Points, newObjective.IsSecret, newObjective.Source);
     }
 
     HideOverlay();
+  }
+
+  private void OnObjectiveNameChanged(object value)
+  {
+    var match = ObjectiveCatalog.FindByName(value as string ?? string.Empty);
+    newObjective.Condition = match?.Condition ?? string.Empty;
+    newObjective.Points = match?.Points ?? newObjective.Points;
+    newObjective.IsSecret = match?.IsSecret ?? newObjective.IsSecret;
+    newObjective.Source = match?.Source ?? string.Empty;
   }
 
   private Task RemoveObjective(Objective objective, Player? player = null) =>

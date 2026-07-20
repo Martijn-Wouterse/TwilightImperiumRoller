@@ -5,9 +5,9 @@
     <div class="d-flex flex-column justify-content-evenly m-2 p-2">
       <h2>Adding objective for: @(editingPlayer == null ? "Everyone" : editingPlayer.Name)</h2>
       Objective Name:
-      <RadzenTextBox @bind-Value="newObjective.Name"></RadzenTextBox>
+      <RadzenAutoComplete Data="@ObjectiveNameSuggestions" @bind-Value="newObjective.Name" Change="@OnObjectiveNameChanged" Placeholder="Start typing an objective name..." />
       Objective text:
-      <RadzenTextBox @bind-Value="newObjective.Description"></RadzenTextBox>
+      <RadzenTextBox @bind-Value="newObjective.Condition"></RadzenTextBox>
       Points:
       <RadzenNumeric @bind-Value="newObjective.Points">points:</RadzenNumeric>
       Is secret:
@@ -110,7 +110,7 @@
                       <RadzenIcon Icon="Close" IconColor="@Colors.Warning" onclick="@(() => RemoveObjective(objective))"></RadzenIcon>
                     }
                   </div>
-                  <div class="d-flex flex-row justify-content-center">@objective.Description</div>
+                  <div class="d-flex flex-row justify-content-center">@objective.Condition</div>
                   <div class="d-flex justify-content-center">Scored by:</div>
                   <div class="d-grid gap-2" style="grid-template-columns: 1fr 1fr;">
                     @foreach (Player player in GameStateModel.Players)
