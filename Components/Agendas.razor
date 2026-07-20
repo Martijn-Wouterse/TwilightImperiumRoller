@@ -2,9 +2,11 @@
   <div class="d-flex flex-column justify-content-evenly m-2 p-2">
     <h2>Adding Agenda</h2>
     Agenda Name:
-    <RadzenTextBox @bind-Value="newAgenda.Name"></RadzenTextBox>
-    Objective text:
-    <RadzenTextBox @bind-Value="newAgenda.Description"></RadzenTextBox>
+    <RadzenAutoComplete Data="@AgendaNameSuggestions" @bind-Value="newAgenda.Name" Change="@OnAgendaNameChanged" Placeholder="Start typing an agenda name..." />
+    Elect (if applicable):
+    <RadzenTextBox @bind-Value="newAgenda.Elect"></RadzenTextBox>
+    Effect:
+    <RadzenTextBox @bind-Value="newAgenda.Effect"></RadzenTextBox>
     <RadzenButton Click="OnConfirmAgenda">Confirm</RadzenButton>
   </div>
 </div>
@@ -21,7 +23,11 @@
         }
 
       </div>
-      <div>@agenda.Description</div>
+      @if (!string.IsNullOrWhiteSpace(agenda.Elect))
+      {
+        <div><strong>Elect:</strong> @agenda.Elect</div>
+      }
+      <div>@agenda.Effect</div>
     </div>
   }
   @if (IsAdmin)

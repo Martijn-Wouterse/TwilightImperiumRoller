@@ -1,3 +1,7 @@
+html, body {
+  height: 100%;
+}
+
 body {
   background: #002;
   color: white;
@@ -120,4 +124,14 @@ body{
         color: #000;
         transform: scale(1);
     }
+}
+
+/* The autocomplete suggestion popup must render above the "popout" dialogs (z-index: 999999), and its text
+   needs to stay readable against the popup's light background instead of the page's default white-on-dark text. */
+.rz-autocomplete-panel.rz-popup.rz-open {
+    z-index: 9999991 !important;
+}
+
+.rz-autocomplete-panel.rz-popup.rz-open .rz-autocomplete-list-item {
+    color: black;
 }

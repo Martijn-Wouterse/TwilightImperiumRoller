@@ -1,5 +1,4 @@
-﻿@using System.Drawing
-@using TwilightImperiumRoller.Models
+﻿@using TwilightImperiumRoller.Models
 <div class="w-100">
 
   <div class="popout @overlayVisible glow" style="width: fit-content;">
@@ -21,7 +20,7 @@
 
   <div class="d-flex flex-column gap-2">
     <div class="d-flex flex-row justify-content-evenly gap-2 flex-wrap">
-      @foreach (Player player in GameStateModel.Players.OrderByDescending(p => p.Points))
+      @foreach (Player player in GameStateModel.Players.OrderByDescending(p => GameStateService.GetPoints(p.Id)))
       {
         <div class="d-flex flex-column h-100 align-items-center gap-1 glow"
              style="outline: 2px solid transparent;
@@ -29,14 +28,14 @@
                   box-shadow: 0 0 10px @player.Color; */
                   background:#00004480 ;
                   min-width: fit-content;">
-          <div class="w-100 h-100 p-3" style="background: @Color.FromArgb((int)(0.6 * 255), Color.FromName(player.Color)).ToHexaString(); width: @(Math.Round( (decimal) (90 /GameStateModel.Players.Count)) )vw !important; min-width: 300px;">
+          <div class="w-100 h-100 p-3" style="background: color-mix(in srgb, @player.Color 60%, transparent); width: @(Math.Round( (decimal) (90 /GameStateModel.Players.Count)) )vw !important; min-width: 300px;">
             <div style="opacity: 1;">
-              <div class="d-flex flex-row>">
+              <div class="d-flex flex-row">
                 <div class="d-flex flex-column justify-content-around">
                   @if (IsAdmin)
                   {
                     <h2>@player.Name</h2>
-                    <RadzenTextBox @bind-Value="@player.Color" Change="@(args => { player.Color = args; StateHasChanged(); StoreGameState();})" Immediate="false"></RadzenTextBox>
+                    <RadzenTextBox @bind-Value="@player.Color" Change="@(args => OnPlayerColorChanged(player, args))" Immediate="false"></RadzenTextBox>
                   }
                   else
                   {
@@ -45,7 +44,7 @@
 
                   @if (IsAdmin)
                   {
-                    <RadzenDropDown Data="@Factions" @bind-Value="@player.Faction" Name="Factions" Change="@(args => { player.Faction = (EFactions)args; StateHasChanged(); StoreGameState();})">
+                    <RadzenDropDown Data="@Factions" @bind-Value="@player.Faction" Name="Factions" Change="@(args => OnPlayerFactionChanged(player, (EFactions)args))">
                       <Template>
                         @Enum.GetName(typeof(EFactions), context)
                       </Template>
@@ -62,10 +61,10 @@
 
 
               </div>
-              <h2>@player.Points</h2>
+              <h2>@GameStateService.GetPoints(player.Id)</h2>
               <span>Scored objectives:</span>
               <div class="d-flex flex-row flex-wrap w-100 gap-2">
-                @foreach (var objective in player.Objectives)
+                @foreach (var objective in GameStateService.GetObjectivesForPlayer(player.Id))
                 {
                   <div class="d-flex flex-row justify-content-between">
                     <div class="@(objective.IsSecret ? "secret-objective" : "objective")">@objective.Name - @objective.Points </div>
@@ -99,7 +98,7 @@
             <h2>Round @round.RoundNumber</h2>
             </div>
             <div class="d-flex flex-row gap-2 flex-wrap">
-              @foreach (var objective in round.Objectives)
+              @foreach (var objective in GameStateService.GetObjectivesForRound(round))
               {
                 <div class="d-flex flex-column gap-1 glow justify-content-center  p-2" style="background:#00004480 ; max-width: 20vw; min-width:300px;">
                   <div class="d-flex flex-row justify-content-center">
@@ -118,7 +117,7 @@
                     {
                       <div class="d-flex flex-row justify-content-around">
                         <div class="d-flex flex-row justify-content-start w-100 align-items-baseline">
-                          <RadzenCheckBox Style="margin: 5px;" Disabled="@(IsAdmin == false)" Change="@( (bool isChecked) => OnGetObjective(objective, player) )" Value="@objective.ScoredPlayers.Contains(player)" />
+                          <RadzenCheckBox Style="margin: 5px;" Disabled="@(IsAdmin == false)" Change="@( (bool isChecked) => OnGetObjective(objective, player) )" Value="@objective.ScoredPlayerIds.Contains(player.Id)" />
                           <span> @player.Name</span>
                         </div>
                       </div>

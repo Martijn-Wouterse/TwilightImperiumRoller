@@ -5,13 +5,13 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <base href="/" />
-  <link rel="stylesheet" href="app.css" />
-  <link rel="stylesheet" href="/app.css" />
   <link rel="stylesheet" href="/bootstrap/bootstrap.min.css" />
   <link rel="stylesheet" href="/bootstrap/bootstrap.min.css.map" />
   <link rel="stylesheet" href="TwilightImperiumRoller.styles.css" />
   <link href="_content/Blazor.Bootstrap/blazor.bootstrap.css" rel="stylesheet" />
   <RadzenTheme Theme="material" />
+  <!-- Loaded last so our overrides (dark body background, starfield) win the cascade over Bootstrap/Radzen defaults. -->
+  <link rel="stylesheet" href="app.css" />
   <HeadOutlet />
 </head>
 

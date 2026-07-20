@@ -1,5 +1,6 @@
 using Radzen;
 using TwilightImperiumRoller.Components;
+using TwilightImperiumRoller.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,9 +9,15 @@ builder.Services.AddBlazorBootstrap();
 builder.Services.AddRadzenComponents();
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton<IGameStateRepository, JsonFileGameStateRepository>();
+builder.Services.AddSingleton<IGameStateService, GameStateService>();
+builder.Services.AddSingleton<IDiceRollingService, DiceRollingService>();
+builder.Services.AddSingleton<IAgendaCatalogService, AgendaCatalogService>();
 
 var app = builder.Build();
+
+await app.Services.GetRequiredService<IGameStateService>().InitializeAsync();
+await app.Services.GetRequiredService<IAgendaCatalogService>().InitializeAsync();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
