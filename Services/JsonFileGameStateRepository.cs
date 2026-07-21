@@ -3,17 +3,11 @@ using TwilightImperiumRoller.Models;
 
 namespace TwilightImperiumRoller.Services;
 
-public class JsonFileGameStateRepository : IGameStateRepository
+public class JsonFileGameStateRepository(IWebHostEnvironment environment, ILogger<JsonFileGameStateRepository> logger) : IGameStateRepository
 {
-  private readonly string _filePath;
-  private readonly ILogger<JsonFileGameStateRepository> _logger;
+  private readonly string _filePath = Path.Combine(environment.ContentRootPath, "Data", "game-state.json");
+  private readonly ILogger<JsonFileGameStateRepository> _logger = logger;
   private readonly JsonSerializerOptions _options = new() { WriteIndented = true };
-
-  public JsonFileGameStateRepository(IWebHostEnvironment environment, ILogger<JsonFileGameStateRepository> logger)
-  {
-    _filePath = Path.Combine(environment.ContentRootPath, "Data", "game-state.json");
-    _logger = logger;
-  }
 
   public async Task<GameStateModel?> LoadAsync()
   {
@@ -24,7 +18,7 @@ public class JsonFileGameStateRepository : IGameStateRepository
 
     try
     {
-      await using var stream = File.OpenRead(_filePath);
+      await using FileStream stream = File.OpenRead(_filePath);
       return await JsonSerializer.DeserializeAsync<GameStateModel>(stream, _options);
     }
     catch (JsonException ex)

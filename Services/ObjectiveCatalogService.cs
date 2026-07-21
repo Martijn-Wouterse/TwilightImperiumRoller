@@ -3,19 +3,13 @@ using TwilightImperiumRoller.Models;
 
 namespace TwilightImperiumRoller.Services;
 
-public class ObjectiveCatalogService : IObjectiveCatalogService
+public class ObjectiveCatalogService(IWebHostEnvironment environment, ILogger<ObjectiveCatalogService> logger) : IObjectiveCatalogService
 {
-  private readonly string _filePath;
-  private readonly ILogger<ObjectiveCatalogService> _logger;
+  private readonly string _filePath = Path.Combine(environment.ContentRootPath, "Data", "objectives.json");
+  private readonly ILogger<ObjectiveCatalogService> _logger = logger;
   private readonly JsonSerializerOptions _options = new() { PropertyNameCaseInsensitive = true };
   private readonly SemaphoreSlim _initLock = new(1, 1);
   private bool _initialized;
-
-  public ObjectiveCatalogService(IWebHostEnvironment environment, ILogger<ObjectiveCatalogService> logger)
-  {
-    _filePath = Path.Combine(environment.ContentRootPath, "Data", "objectives.json");
-    _logger = logger;
-  }
 
   public IReadOnlyList<ObjectiveCardDefinition> All { get; private set; } = [];
 
@@ -38,7 +32,7 @@ public class ObjectiveCatalogService : IObjectiveCatalogService
       {
         try
         {
-          await using var stream = File.OpenRead(_filePath);
+          await using FileStream stream = File.OpenRead(_filePath);
           All = await JsonSerializer.DeserializeAsync<List<ObjectiveCardDefinition>>(stream, _options) ?? [];
         }
         catch (JsonException ex)

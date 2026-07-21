@@ -37,7 +37,7 @@ public partial class Agendas : ComponentBase, IDisposable
 
   private void OnAgendaNameChanged(object value)
   {
-    var match = AgendaCatalog.FindByName(value as string ?? string.Empty);
+    AgendaCardDefinition? match = AgendaCatalog.FindByName(value as string ?? string.Empty);
     newAgenda.Elect = match?.Elect;
     newAgenda.Effect = match?.Effect ?? string.Empty;
   }

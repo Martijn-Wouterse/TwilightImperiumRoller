@@ -9,7 +9,7 @@ public partial class DiceRoller
   [Inject]
   private IDiceRollingService DiceRollingService { get; set; } = null!;
 
-  public List<ShipStats> ShipStats { get; set; } = new();
+  public List<ShipStats> ShipStats { get; set; } = [];
 
   protected override void OnInitialized()
   {
@@ -54,7 +54,7 @@ public partial class DiceRoller
     DisplayResult();
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
 
-    foreach (var ship in ShipStats.Where(s => s.Dice >= 1))
+    foreach (ShipStats ship in ShipStats.Where(s => s.Dice >= 1))
     {
       for (int i = 0; i < ship.Dice; i++)
       {
@@ -75,7 +75,7 @@ public partial class DiceRoller
 
   private async Task DisplayResult()
   {
-    var highestResult = 0;
+    int highestResult = 0;
     while (waitingForRoll)
     {
       int hits = DiceRollingService.CountHits(ShipStats);

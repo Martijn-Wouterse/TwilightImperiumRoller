@@ -1,4 +1,5 @@
-﻿<div class="popout @overlayVisible glow" style="width: fit-content;">
+﻿@using TwilightImperiumRoller.Models
+<div class="popout @overlayVisible glow" style="width: fit-content;">
   <div class="d-flex flex-column justify-content-evenly m-2 p-2">
     <h2>Adding Agenda</h2>
     Agenda Name:
@@ -12,7 +13,7 @@
 </div>
 
 <div class="d-flex flex-row flex-wrap gap-2">
-  @foreach (var agenda in GameStateModel.Agenda)
+  @foreach (Agenda agenda in GameStateModel.Agenda)
   {
     <div class="d-flex flex-column gap-1 glow  p-2" style="background:#00004480 ; max-width: 20vw; min-width:300px; height: 30vh;">
       <div class="d-flex flex-row justify-content-center" style="border-bottom: white 2px solid">

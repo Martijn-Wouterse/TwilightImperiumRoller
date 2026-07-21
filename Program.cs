@@ -2,7 +2,7 @@ using Radzen;
 using TwilightImperiumRoller.Components;
 using TwilightImperiumRoller.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddBlazorBootstrap();
@@ -16,7 +16,7 @@ builder.Services.AddSingleton<IDiceRollingService, DiceRollingService>();
 builder.Services.AddSingleton<IAgendaCatalogService, AgendaCatalogService>();
 builder.Services.AddSingleton<IObjectiveCatalogService, ObjectiveCatalogService>();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 await app.Services.GetRequiredService<IGameStateService>().InitializeAsync();
 await app.Services.GetRequiredService<IAgendaCatalogService>().InitializeAsync();

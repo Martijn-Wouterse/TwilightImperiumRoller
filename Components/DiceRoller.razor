@@ -1,4 +1,5 @@
-﻿<div class="popout @overlayVisible glow" @onclick="@HideOverlay" style="width: fit-content;">
+﻿@using TwilightImperiumRoller.Models
+<div class="popout @overlayVisible glow" @onclick="@HideOverlay" style="width: fit-content;">
   <div class="d-flex flex-column justify-content-evenly m-2 p-2">
     @if (rollResult != null)
     {
@@ -8,7 +9,7 @@
         </div>
       </div>
       <div class="d-flex flex-row justify-content-evenly flex-wrap w-100">
-        @foreach (var item in ShipStats.Where(s => s.Results.Any()))
+        @foreach (ShipStats item in ShipStats.Where(s => s.Results.Any()))
         {
           <div class="d-flex flex-column m-1 p-1">
             <div class="d-flex justify-content-center">
@@ -18,7 +19,7 @@
             </div>
 
             <div class="d-inline-flex flex-wrap justify-content-center">
-              @foreach (var result in item.Results)
+              @foreach (DieRoll result in item.Results)
               {
                 @if (result.FinalValue == null)
                 {
@@ -47,7 +48,7 @@
 
 <div class="d-flex flex-column" style="margin:2em;">
 
-  @foreach (var item in ShipStats)
+  @foreach (ShipStats item in ShipStats)
   {
     <div class="d-flex flex-row p-2 m-1 glow justify-content-between" style="width:100%; background:#00004480 ;">
       <div>

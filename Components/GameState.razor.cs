@@ -65,7 +65,7 @@ public partial class GameState : ComponentBase, IDisposable
 
   private void OnObjectiveNameChanged(object value)
   {
-    var match = ObjectiveCatalog.FindByName(value as string ?? string.Empty);
+    ObjectiveCardDefinition? match = ObjectiveCatalog.FindByName(value as string ?? string.Empty);
     newObjective.Condition = match?.Condition ?? string.Empty;
     newObjective.Points = match?.Points ?? newObjective.Points;
     newObjective.IsSecret = match?.IsSecret ?? newObjective.IsSecret;

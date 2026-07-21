@@ -2,15 +2,10 @@ using System.Text;
 
 namespace TwilightImperiumRoller.Services;
 
-public class GameLogService : IGameLogService
+public class GameLogService(IWebHostEnvironment environment) : IGameLogService
 {
-  private readonly string _filePath;
+  private readonly string _filePath = Path.Combine(environment.ContentRootPath, "Data", "game-log.txt");
   private readonly SemaphoreSlim _writeLock = new(1, 1);
-
-  public GameLogService(IWebHostEnvironment environment)
-  {
-    _filePath = Path.Combine(environment.ContentRootPath, "Data", "game-log.txt");
-  }
 
   public async Task AppendAsync(string message)
   {

@@ -2,18 +2,12 @@ using TwilightImperiumRoller.Models;
 
 namespace TwilightImperiumRoller.Services;
 
-public class GameStateService : IGameStateService
+public class GameStateService(IGameStateRepository repository, IGameLogService gameLog) : IGameStateService
 {
-  private readonly IGameStateRepository _repository;
-  private readonly IGameLogService _gameLog;
+  private readonly IGameStateRepository _repository = repository;
+  private readonly IGameLogService _gameLog = gameLog;
   private readonly SemaphoreSlim _initLock = new(1, 1);
   private bool _initialized;
-
-  public GameStateService(IGameStateRepository repository, IGameLogService gameLog)
-  {
-    _repository = repository;
-    _gameLog = gameLog;
-  }
 
   public GameStateModel Current { get; private set; } = new();
 
@@ -34,7 +28,7 @@ public class GameStateService : IGameStateService
         return;
       }
 
-      var loaded = await _repository.LoadAsync();
+      GameStateModel? loaded = await _repository.LoadAsync();
       if (loaded is null)
       {
         Current = CreateSeedState();
@@ -61,7 +55,7 @@ public class GameStateService : IGameStateService
 
   public async Task UpdatePlayerColorAsync(Guid playerId, string color)
   {
-    var player = Current.Players.First(p => p.Id == playerId);
+    Player player = Current.Players.First(p => p.Id == playerId);
     player.Color = color;
     await _gameLog.AppendAsync($"Changed {player.Name}'s color to {color}.");
     await SaveAsync();
@@ -69,7 +63,7 @@ public class GameStateService : IGameStateService
 
   public async Task UpdatePlayerFactionAsync(Guid playerId, Faction faction)
   {
-    var player = Current.Players.First(p => p.Id == playerId);
+    Player player = Current.Players.First(p => p.Id == playerId);
     player.Faction = faction;
     await _gameLog.AppendAsync($"Changed {player.Name}'s faction to {faction.GetFactionName()}.");
     await SaveAsync();
@@ -85,7 +79,7 @@ public class GameStateService : IGameStateService
 
   public async Task<GameRound> AddRoundAsync()
   {
-    var round = new GameRound { RoundNumber = Current.Rounds.Count + 1 };
+    GameRound round = new() { RoundNumber = Current.Rounds.Count + 1 };
     Current.Rounds.Add(round);
     await _gameLog.AppendAsync($"Added Round {round.RoundNumber}.");
     await SaveAsync();
@@ -94,8 +88,8 @@ public class GameStateService : IGameStateService
 
   public async Task<Objective> AddSecretObjectiveAsync(Guid playerId, string name, string condition, int points, string source = "")
   {
-    var player = Current.Players.First(p => p.Id == playerId);
-    var objective = new Objective
+    Player player = Current.Players.First(p => p.Id == playerId);
+    Objective objective = new()
     {
       Name = name,
       Condition = condition,
@@ -114,8 +108,8 @@ public class GameStateService : IGameStateService
 
   public async Task<Objective> AddRoundObjectiveAsync(Guid roundId, string name, string condition, int points, bool isSecret, string source = "")
   {
-    var round = Current.Rounds.First(r => r.Id == roundId);
-    var objective = new Objective
+    GameRound round = Current.Rounds.First(r => r.Id == roundId);
+    Objective objective = new()
     {
       Name = name,
       Condition = condition,
@@ -134,13 +128,13 @@ public class GameStateService : IGameStateService
 
   public async Task UnassignObjectiveFromPlayerAsync(Guid objectiveId, Guid playerId)
   {
-    var objective = Current.Objectives.FirstOrDefault(o => o.Id == objectiveId);
+    Objective? objective = Current.Objectives.FirstOrDefault(o => o.Id == objectiveId);
     if (objective is null)
     {
       return;
     }
 
-    var player = Current.Players.First(p => p.Id == playerId);
+    Player player = Current.Players.First(p => p.Id == playerId);
     objective.ScoredPlayerIds.Remove(playerId);
     if (objective.OwnerPlayerId == playerId)
     {
@@ -158,8 +152,8 @@ public class GameStateService : IGameStateService
 
   public async Task DeleteRoundObjectiveAsync(Guid objectiveId)
   {
-    var objective = Current.Objectives.FirstOrDefault(o => o.Id == objectiveId);
-    var round = Current.Rounds.FirstOrDefault(r => r.ObjectiveIds.Contains(objectiveId));
+    Objective? objective = Current.Objectives.FirstOrDefault(o => o.Id == objectiveId);
+    GameRound? round = Current.Rounds.FirstOrDefault(r => r.ObjectiveIds.Contains(objectiveId));
     round?.ObjectiveIds.Remove(objectiveId);
     Current.Objectives.RemoveAll(o => o.Id == objectiveId);
     if (objective is not null && round is not null)
@@ -172,13 +166,13 @@ public class GameStateService : IGameStateService
 
   public async Task ToggleObjectiveScoredAsync(Guid objectiveId, Guid playerId)
   {
-    var objective = Current.Objectives.FirstOrDefault(o => o.Id == objectiveId);
+    Objective? objective = Current.Objectives.FirstOrDefault(o => o.Id == objectiveId);
     if (objective is null)
     {
       return;
     }
 
-    var player = Current.Players.First(p => p.Id == playerId);
+    Player player = Current.Players.First(p => p.Id == playerId);
     if (!objective.ScoredPlayerIds.Remove(playerId))
     {
       objective.ScoredPlayerIds.Add(playerId);
@@ -194,7 +188,7 @@ public class GameStateService : IGameStateService
 
   public async Task<Agenda> AddAgendaAsync(string name, string? elect, string effect)
   {
-    var agenda = new Agenda { Name = name, Elect = elect, Effect = effect };
+    Agenda agenda = new() { Name = name, Elect = elect, Effect = effect };
     Current.Agenda.Add(agenda);
     await _gameLog.AppendAsync($"Added agenda \"{name}\".");
     await SaveAsync();
@@ -203,7 +197,7 @@ public class GameStateService : IGameStateService
 
   public async Task RemoveAgendaAsync(Guid agendaId)
   {
-    var agenda = Current.Agenda.FirstOrDefault(a => a.Id == agendaId);
+    Agenda? agenda = Current.Agenda.FirstOrDefault(a => a.Id == agendaId);
     Current.Agenda.RemoveAll(a => a.Id == agendaId);
     if (agenda is not null)
     {

@@ -38,7 +38,7 @@ public class AgendaCatalogService : IAgendaCatalogService
       {
         try
         {
-          await using var stream = File.OpenRead(_filePath);
+          await using FileStream stream = File.OpenRead(_filePath);
           All = await JsonSerializer.DeserializeAsync<List<AgendaCardDefinition>>(stream, _options) ?? [];
         }
         catch (JsonException ex)
