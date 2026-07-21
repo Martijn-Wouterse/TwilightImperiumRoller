@@ -55,12 +55,8 @@
                   {
                     <h4>@player.Faction.GetFactionName()</h4>
                   }
-
                 </div>
-
                 <RadzenImage Style="width:50px; height: 50px;" Path="@player.Faction.GetFactionLink()" />
-
-
               </div>
               <h2>@GameStateService.GetPoints(player.Id)</h2>
               <span><b>Scored objectives:</b></span>
@@ -103,9 +99,7 @@
               {
                 <div class="d-flex flex-column gap-1 glow justify-content-center  p-2" style="background:#00004480 ; max-width: 20vw; min-width:300px;">
                   <div class="d-flex flex-row justify-content-center">
-
                     <h3>@objective.Name</h3>
-
                     @if (IsAdmin)
                     {
                       <RadzenIcon Icon="Close" IconColor="@Colors.Warning" onclick="@(() => RemoveObjective(objective))"></RadzenIcon>
@@ -130,7 +124,6 @@
               {
                 <RadzenButton Click="@(() => OnAddObjective(round))">Add objective</RadzenButton>
               }
-
             </div>
           </div>
         }

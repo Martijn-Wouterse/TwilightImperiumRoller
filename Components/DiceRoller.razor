@@ -1,4 +1,4 @@
-﻿@using TwilightImperiumRoller.Models
+@using TwilightImperiumRoller.Models
 <div class="popout @overlayVisible glow" @onclick="@HideOverlay" style="width: fit-content;">
   <div class="d-flex flex-column justify-content-evenly m-2 p-2">
     @if (rollResult != null)
@@ -17,7 +17,6 @@
                 @item.Name
               </h3>
             </div>
-
             <div class="d-inline-flex flex-wrap justify-content-center">
               @foreach (DieRoll result in item.Results)
               {
@@ -33,7 +32,6 @@
                 {
                   <div class="result flash" style="background-color: darkred; ">@result.DisplayValue</div>
                 }
-
               }
             </div>
           </div>
@@ -44,7 +42,6 @@
 </div>
 
 <div class="overlay @overlayVisible" @onclick="@HideOverlay" />
-
 
 <div class="d-flex flex-column" style="margin:2em;">
 
@@ -70,7 +67,6 @@
           </div>
         </div>
       </div>
-
     </div>
   }
 </div>

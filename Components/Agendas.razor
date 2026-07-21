@@ -1,4 +1,4 @@
-﻿@using TwilightImperiumRoller.Models
+@using TwilightImperiumRoller.Models
 <div class="popout @overlayVisible glow" style="width: fit-content;">
   <div class="d-flex flex-column justify-content-evenly m-2 p-2">
     <h2>Adding Agenda</h2>
@@ -22,7 +22,6 @@
         {
           <RadzenIcon Icon="Close" IconColor="@Colors.Warning" onclick="@(() => RemoveAgenda(agenda))"></RadzenIcon>
         }
-
       </div>
       @if (!string.IsNullOrWhiteSpace(agenda.Elect))
       {
