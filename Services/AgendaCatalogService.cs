@@ -3,19 +3,13 @@ using TwilightImperiumRoller.Models;
 
 namespace TwilightImperiumRoller.Services;
 
-public class AgendaCatalogService : IAgendaCatalogService
+public class AgendaCatalogService(IWebHostEnvironment environment, ILogger<AgendaCatalogService> logger) : IAgendaCatalogService
 {
-  private readonly string _filePath;
-  private readonly ILogger<AgendaCatalogService> _logger;
+  private readonly string _filePath = Path.Combine(environment.ContentRootPath, "Data", "agendas.json");
+  private readonly ILogger<AgendaCatalogService> _logger = logger;
   private readonly JsonSerializerOptions _options = new() { PropertyNameCaseInsensitive = true };
   private readonly SemaphoreSlim _initLock = new(1, 1);
   private bool _initialized;
-
-  public AgendaCatalogService(IWebHostEnvironment environment, ILogger<AgendaCatalogService> logger)
-  {
-    _filePath = Path.Combine(environment.ContentRootPath, "Data", "agendas.json");
-    _logger = logger;
-  }
 
   public IReadOnlyList<AgendaCardDefinition> All { get; private set; } = [];
 
