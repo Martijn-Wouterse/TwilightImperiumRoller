@@ -6,4 +6,5 @@ public class GameStateModel
   public List<GameRound> Rounds { get; set; } = [];
   public List<Objective> Objectives { get; set; } = [];
   public List<Agenda> Agenda { get; set; } = [];
+  public AgendaVote? ActiveVote { get; set; }
 }

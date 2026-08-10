@@ -207,6 +207,102 @@ public class GameStateService(IGameStateRepository repository, IGameLogService g
     await SaveAsync();
   }
 
+  public async Task<AgendaVote> StartVoteAsync(string agendaName, string? elect, string effect, IReadOnlyList<string> outcomeLabels)
+  {
+    if (Current.ActiveVote is not null)
+    {
+      throw new InvalidOperationException("A vote is already in progress.");
+    }
+
+    AgendaVote vote = new()
+    {
+      AgendaName = agendaName,
+      Elect = elect,
+      Effect = effect,
+      Outcomes = outcomeLabels.Select(label => new AgendaVoteOutcome { Label = label }).ToList(),
+    };
+    Current.ActiveVote = vote;
+    await _gameLog.AppendAsync($"Started vote on \"{agendaName}\" ({string.Join(", ", outcomeLabels)}).");
+    await SaveAsync();
+    return vote;
+  }
+
+  public async Task CastVoteAsync(Guid outcomeId, Guid sessionId, int amount)
+  {
+    AgendaVoteOutcome? outcome = Current.ActiveVote?.Outcomes.FirstOrDefault(o => o.Id == outcomeId);
+    if (outcome is null)
+    {
+      // The round may have just been stopped by the admin; the client can't reliably know that
+      // in time, so ignore the stray cast instead of throwing.
+      return;
+    }
+
+    if (amount <= 0)
+    {
+      outcome.Contributions.Remove(sessionId);
+    }
+    else
+    {
+      outcome.Contributions[sessionId] = amount;
+    }
+
+    // Deliberately not logged via _gameLog: every numeric edit + click would spam game-log.txt,
+    // which is meant to be a readable history, not a vote-by-vote audit trail. Start/Stop are
+    // logged instead, and Changed still fires so totals update live for everyone.
+    await SaveAsync();
+  }
+
+  public async Task AddVoteOutcomeAsync(string label)
+  {
+    AgendaVote? vote = Current.ActiveVote;
+    if (vote is null || string.IsNullOrWhiteSpace(vote.Elect) || string.IsNullOrWhiteSpace(label))
+    {
+      // Only "elect" agendas (e.g. elect a player/planet/law) let voters propose their own
+      // outcome; fixed-outcome agendas (e.g. plain For/Against) stay limited to what the admin
+      // configured at StartVoteAsync.
+      return;
+    }
+
+    string trimmed = label.Trim();
+    if (vote.Outcomes.Any(o => string.Equals(o.Label, trimmed, StringComparison.OrdinalIgnoreCase)))
+    {
+      return;
+    }
+
+    vote.Outcomes.Add(new AgendaVoteOutcome { Label = trimmed });
+    await SaveAsync();
+  }
+
+  public async Task StopVoteAsync()
+  {
+    AgendaVote? vote = Current.ActiveVote;
+    if (vote is null)
+    {
+      return;
+    }
+
+    int maxTotal = vote.Outcomes.Count == 0 ? 0 : vote.Outcomes.Max(o => o.Contributions.Values.Sum());
+    string resultText;
+    if (vote.Outcomes.Count == 0 || maxTotal == 0)
+    {
+      resultText = "No votes were cast.";
+    }
+    else
+    {
+      string tally = string.Join(", ", vote.Outcomes.Select(o => $"{o.Label}: {o.Contributions.Values.Sum()}"));
+      string winners = string.Join(" / ", vote.Outcomes.Where(o => o.Contributions.Values.Sum() == maxTotal).Select(o => o.Label));
+      resultText = $"Result — {tally}. Outcome: {winners}.";
+    }
+
+    string effectText = string.IsNullOrWhiteSpace(vote.Effect) ? resultText : $"{vote.Effect}\n\n{resultText}";
+    Agenda agenda = new() { Name = vote.AgendaName, Elect = vote.Elect, Effect = effectText };
+    Current.Agenda.Add(agenda);
+    Current.ActiveVote = null;
+
+    await _gameLog.AppendAsync($"Stopped vote on \"{vote.AgendaName}\". {resultText}");
+    await SaveAsync();
+  }
+
   private static GameStateModel CreateSeedState() => new()
   {
     Players =

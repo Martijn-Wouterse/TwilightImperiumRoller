@@ -27,4 +27,9 @@ public interface IGameStateService
 
   Task<Agenda> AddAgendaAsync(string name, string? elect, string effect);
   Task RemoveAgendaAsync(Guid agendaId);
+
+  Task<AgendaVote> StartVoteAsync(string agendaName, string? elect, string effect, IReadOnlyList<string> outcomeLabels);
+  Task CastVoteAsync(Guid outcomeId, Guid sessionId, int amount);
+  Task AddVoteOutcomeAsync(string label);
+  Task StopVoteAsync();
 }
