@@ -22,6 +22,12 @@
       <RadzenTabsItem Text="Agendas">
         <Agendas IsAdmin="@isAdmin"></Agendas>
       </RadzenTabsItem>
+      @if (isAdmin)
+      {
+        <RadzenTabsItem Text="Players settings">
+          <PlayersAdmin></PlayersAdmin>
+        </RadzenTabsItem>
+      }
     </Tabs>
   </RadzenTabs>
 </div>

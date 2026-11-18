@@ -1,0 +1,102 @@
+﻿.players-admin {
+  padding: 1rem;
+}
+
+.players-admin__title {
+  margin: 0 0 0.75rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 0.75rem;
+}
+
+::deep .player-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  background: #1e2230;
+  color: #e8eaf0;
+}
+
+.player-card__row {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+.player-card__number {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 700;
+}
+
+.player-card__icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.player-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.player-card__field--grow {
+  flex: 1;
+}
+
+.player-card__field--color {
+  width: 9rem;
+  flex-shrink: 0;
+}
+
+.player-card__field label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.7;
+}
+
+::deep .player-card__error {
+  color: #ff6b6b;
+  font-size: 0.8rem;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Let the selected colour show through Radzen's own label/arrow styling */
+::deep .color-dropdown .rz-dropdown-label,
+::deep .color-dropdown .rz-dropdown-trigger {
+  color: inherit;
+  background: transparent;
+}
+
+.color-option {
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+}
+
+::deep .player-card__delete {
+  height: 2.25rem;
+  flex-shrink: 0;
+}

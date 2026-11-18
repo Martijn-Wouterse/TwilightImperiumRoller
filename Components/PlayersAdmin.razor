@@ -1,0 +1,84 @@
+﻿@using TwilightImperiumRoller.Models
+@using ButtonType = Radzen.ButtonType
+
+<section class="players-admin">
+  <h3 class="players-admin__title">Player settings</h3>
+
+  <div class="player-grid">
+    @foreach (var (player, index) in Players.Select((p, i) => (p, i)))
+    {
+      <EditForm Model="player" class="player-card">
+        <DataAnnotationsValidator />
+
+        <div class="player-card__row">
+          <span class="player-card__number">@(index + 1)</span>
+          <div class="player-card__field player-card__field--grow">
+            <label>Name</label>
+            <RadzenTextBox @bind-Value="player.Name"
+                           Change="@(args => OnPlayerNameChanged(player, args))"
+                           Placeholder="@($"Player {index + 1}")"
+                           Style="width:100%;" />
+          </div>
+          <RadzenButton Icon="delete"
+                        ButtonStyle="ButtonStyle.Danger"
+                        Variant="Variant.Text"
+                        ButtonType="ButtonType.Button"
+                        title="Remove player"
+                        class="player-card__delete"
+                        Click="@(() => OnDeletePlayer(player))" />
+        </div>
+        <ValidationMessage For="() => player.Name" class="player-card__error" />
+
+        <div class="player-card__row">
+          <img class="player-card__icon" src="@GetIcon(player.Faction)" alt="@player.Faction" />
+
+          <div class="player-card__field player-card__field--grow">
+            <label>Faction</label>
+            <RadzenDropDown TValue="Faction"
+                            Data="@(Enum.GetValues<Faction>())"
+                            @bind-Value="player.Faction"
+                            Change="@(args => OnPlayerFactionChanged(player, (Faction)args))"
+                            title="@GetDescription(player.Faction)"
+                            Style="width:100%;">
+              <Template Context="item">
+                @{ var faction = (Faction)item; }
+                <span class="dropdown-item" title="@GetDescription(faction)">
+                  <img src="@GetIcon(faction)" alt="" width="20" height="20" />
+                  @faction
+                </span>
+              </Template>
+            </RadzenDropDown>
+          </div>
+
+          <div class="player-card__field player-card__field--color">
+            <label>Color</label>
+            <RadzenDropDown TValue="PlayerColor"
+                            Data="@(Enum.GetValues<PlayerColor>())"
+                            @bind-Value="player.Color"
+                            Change="@(args => OnPlayerColorChanged(player, (PlayerColor)args))"
+                            class="color-dropdown"
+                            Style="@($"width:100%; {StyleFor(player.Color)}")">
+              <Template Context="item">
+                @{ var color = (PlayerColor)item; }
+                <span class="dropdown-item color-option" style="@StyleFor(color)">@color</span>
+              </Template>
+            </RadzenDropDown>
+          </div>
+        </div>
+        <ValidationMessage For="() => player.Faction" class="player-card__error" />
+        <ValidationMessage For="() => player.Color" class="player-card__error" />
+      </EditForm>
+    }
+  </div>
+
+  <div class="players-admin__header">
+    <h3 class="players-admin__title">Player settings</h3>
+    <RadzenButton Icon="add"
+                  ButtonStyle="ButtonStyle.Success"
+                  ButtonType="ButtonType.Button"
+                  Text="Add player"
+                  Disabled="@(Players.Count >= MaxPlayers)"
+                  title="@(Players.Count >= MaxPlayers ? $"Maximum of {MaxPlayers} players" : "Add player")"
+                  Click="OnAddPlayer" />
+  </div>
+</section>
