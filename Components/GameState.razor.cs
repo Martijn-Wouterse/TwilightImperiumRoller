@@ -91,12 +91,6 @@ public partial class GameState : ComponentBase, IDisposable
   private Task OnGetObjective(Objective objective, Player player) =>
     IsAdmin ? GameStateService.ToggleObjectiveScoredAsync(objective.Id, player.Id) : Task.CompletedTask;
 
-  private Task OnPlayerColorChanged(Player player, string color) =>
-    GameStateService.UpdatePlayerColorAsync(player.Id, color);
-
-  private Task OnPlayerFactionChanged(Player player, Faction faction) =>
-    GameStateService.UpdatePlayerFactionAsync(player.Id, faction);
-
   public void Dispose()
   {
     GameStateService.Changed -= OnGameStateChanged;

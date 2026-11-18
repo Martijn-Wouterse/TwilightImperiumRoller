@@ -53,7 +53,27 @@ public class GameStateService(IGameStateRepository repository, IGameLogService g
     Changed?.Invoke();
   }
 
-  public async Task UpdatePlayerColorAsync(Guid playerId, string color)
+  public async Task AddNewPlayerAsync()
+  {
+    string newPlayerName = "New Player" + Current.Players.Count;
+    Player newPlayer = new() { Name = newPlayerName, Color = PlayerColor.Red, Faction = Faction.Letnev };
+
+    Current.Players.Add(newPlayer);
+
+    await _gameLog.AppendAsync($"New player named {newPlayer.Name}.");
+    await SaveAsync();
+  }
+
+  public async Task  UpdatePLayerNameAsync(Guid playerId, string name)
+  {
+      Player player = Current.Players.First(p => p.Id == playerId);
+      string oldPlayerName = player.Name;
+      player.Name = name;
+      await _gameLog.AppendAsync($"Changed {oldPlayerName}'s name to {name}.");
+      await SaveAsync();
+    }
+
+  public async Task UpdatePlayerColorAsync(Guid playerId, PlayerColor color)
   {
     Player player = Current.Players.First(p => p.Id == playerId);
     player.Color = color;
@@ -66,6 +86,14 @@ public class GameStateService(IGameStateRepository repository, IGameLogService g
     Player player = Current.Players.First(p => p.Id == playerId);
     player.Faction = faction;
     await _gameLog.AppendAsync($"Changed {player.Name}'s faction to {faction.GetFactionName()}.");
+    await SaveAsync();
+  }
+
+  public async Task DeletePlayerAsync(Guid playerId)
+  {
+    Player player = Current.Players.First(p => p.Id == playerId);
+    Current.Players.Remove(player);
+    await _gameLog.AppendAsync($"Removed player {player.Name}.");
     await SaveAsync();
   }
 
@@ -307,12 +335,12 @@ public class GameStateService(IGameStateRepository repository, IGameLogService g
   {
     Players =
     [
-      new() { Name = "Martijn", Color = "red", Faction = Faction.Letnev },
-      new() { Name = "Daan", Color = "blue", Faction = Faction.Sol },
-      new() { Name = "Tim", Color = "green", Faction = Faction.Arborec },
-      new() { Name = "Tjalling", Color = "purple", Faction = Faction.Empyrean },
-      new() { Name = "Rixt", Color = "yellow", Faction = Faction.Hacan },
-      new() { Name = "Robert", Color = "black", Faction = Faction.Winnu },
+      new() { Name = "Martijn", Color = PlayerColor.Red, Faction = Faction.Letnev },
+      new() { Name = "Daan", Color = PlayerColor.Blue, Faction = Faction.Sol },
+      new() { Name = "Tim", Color = PlayerColor.Green, Faction = Faction.Arborec },
+      new() { Name = "Tjalling", Color = PlayerColor.Purple, Faction = Faction.Empyrean },
+      new() { Name = "Rixt", Color = PlayerColor.Yellow, Faction = Faction.Hacan },
+      new() { Name = "Robert", Color = PlayerColor.Black, Faction = Faction.Winnu },
     ],
     Rounds = [new() { RoundNumber = 1 }],
   };

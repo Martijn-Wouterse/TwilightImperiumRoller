@@ -33,28 +33,9 @@
             <div style="opacity: 1;">
               <div class="d-flex flex-row justify-content-between">
                 <div class="d-flex flex-column justify-content-around">
-                  @if (IsAdmin)
-                  {
-                    <h2>@player.Name</h2>
-                    <RadzenTextBox @bind-Value="@player.Color" Change="@(args => OnPlayerColorChanged(player, args))" Immediate="false"></RadzenTextBox>
-                  }
-                  else
-                  {
-                    <h2>@player.Name</h2>
-                  }
+                  <h2>@player.Name</h2>
+                  <h4>@player.Faction.GetFactionName()</h4>
 
-                  @if (IsAdmin)
-                  {
-                    <RadzenDropDown Data="@Factions" @bind-Value="@player.Faction" Name="Factions" Change="@(args => OnPlayerFactionChanged(player, (Faction)args))">
-                      <Template>
-                        @Enum.GetName(typeof(Faction), context)
-                      </Template>
-                    </RadzenDropDown>
-                  }
-                  else
-                  {
-                    <h4>@player.Faction.GetFactionName()</h4>
-                  }
                 </div>
                 <RadzenImage Style="width:50px; height: 50px;" Path="@player.Faction.GetFactionLink()" />
               </div>

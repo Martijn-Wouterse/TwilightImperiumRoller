@@ -11,8 +11,11 @@ public interface IGameStateService
 
   Task InitializeAsync();
 
-  Task UpdatePlayerColorAsync(Guid playerId, string color);
+  Task AddNewPlayerAsync();
+  Task UpdatePLayerNameAsync(Guid playerId, string name);
+  Task UpdatePlayerColorAsync(Guid playerId, PlayerColor color);
   Task UpdatePlayerFactionAsync(Guid playerId, Faction faction);
+  Task DeletePlayerAsync(Guid playerId);
 
   IEnumerable<Objective> GetObjectivesForPlayer(Guid playerId);
   IEnumerable<Objective> GetObjectivesForRound(GameRound round);
